@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:27:55 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/04/30 20:21:29 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/07 12:39:42 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	find_paths(char **map, int new_x, int new_y);
 static void	_check_params(t_data *game, char **map);
+static void	loop_in_map(t_data *game, t_map tmp, char **map);
 static void	check_tmp(t_map tmp);
 
 void	find_path(t_data *game)
@@ -69,12 +70,19 @@ static void	_check_params(t_data *game, char **map)
 	tmp.exit = 0;
 	tmp.fire = 0;
 	tmp.cols = -1;
+	tmp.enemy = 0;
+	loop_in_map(game, tmp, map);
+	check_tmp(tmp);
+}
+
+static void	loop_in_map(t_data *game, t_map tmp, char **map)
+{
 	while (++tmp.cols < game->map.rows)
 	{
 		tmp.rows = -1;
 		while (++tmp.rows < game->map.cols)
 		{
-			if (!ft_strchr("CPE01X ", map[tmp.cols][tmp.rows]))
+			if (!ft_strchr("CPE01XM ", map[tmp.cols][tmp.rows]))
 				error("find path error");
 			else if (map[tmp.cols][tmp.rows] == COINS)
 				tmp.coins++;
@@ -85,9 +93,13 @@ static void	_check_params(t_data *game, char **map)
 				game->enemy.pos[tmp.fire].x = tmp.cols;
 				game->enemy.pos[tmp.fire++].y = tmp.rows;
 			}
+			else if (map[tmp.cols][tmp.rows] == ENEMY)
+			{
+				game->enemy1.pos[tmp.enemy].x = tmp.cols;
+				game->enemy1.pos[tmp.enemy++].y = tmp.rows;
+			}
 		}
 	}
-	check_tmp(tmp);
 }
 
 static void	check_tmp(t_map tmp)

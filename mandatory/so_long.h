@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 13:33:48 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/04/30 21:31:18 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/07 16:15:02 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@
 
 # define ESC_KEY			53
 
-# define WALL_XPM			"images/wall.xpm"
-# define FLOOR_XPM			"images/space.xpm"
-# define COINS_XPM			"images/collect.xpm"
-# define PLAYER_FRONT_XPM	"images/player_front.xpm"
-# define PLAYER_LEFT_XPM	"images/player_left.xpm"
-# define PLAYER_RIGHT_XPM	"images/player_right.xpm"
-# define PLAYER_BACK_XPM	"images/player_back.xpm"
-# define OPEN_EXIT_XPM		"images/exit_2.xpm"
-# define EXIT_CLOSED_XPM	"images/exit_1.xpm"
-# define WINNER_XPM			"images/winner.xpm"
+# define WALL_XPM			"textures/wall.xpm"
+# define FLOOR_XPM			"textures/space.xpm"
+# define COINS_XPM			"textures/collect.xpm"
+# define PLAYER_FRONT_XPM	"textures/player_front.xpm"
+# define PLAYER_LEFT_XPM	"textures/player_left.xpm"
+# define PLAYER_RIGHT_XPM	"textures/player_right.xpm"
+# define PLAYER_BACK_XPM	"textures/player_back.xpm"
+# define OPEN_EXIT_XPM		"textures/exit_2.xpm"
+# define EXIT_CLOSED_XPM	"textures/exit_1.xpm"
+# define WINNER_XPM			"textures/winner.xpm"
 
 /*------------structures----------*/
 
@@ -137,7 +137,7 @@ int		mouse_hook(t_data *game);
 void	check_floor_coin(t_data *game, int new_px, int new_py, t_pos old);
 
 void	error(char *error);
-void	error_msg(char *error, t_data *game);
+void	error_msg(char *error, t_data *game, int flag);
 
 void	destroy_imgs(t_data *game);
 void	victory(t_data *game);

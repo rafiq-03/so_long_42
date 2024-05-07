@@ -6,13 +6,13 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:27:49 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/04/30 20:06:26 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/07 16:12:44 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	error_msg(char *error, t_data *game)
+void	error_msg(char *error, t_data *game, int flag)
 {
 	int	i;
 
@@ -26,7 +26,8 @@ void	error_msg(char *error, t_data *game)
 	destroy_imgs(game);
 	mlx_destroy_window(game->mlx, game->win);
 	free(game->mlx);
-	ft_putstr_fd("\x1B[31m ERROR :", 2);
+	if (flag != 0)
+		ft_putstr_fd("ERROR :", 2);
 	ft_putendl_fd(error, 2);
 	exit(EXIT_FAILURE);
 }

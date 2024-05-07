@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 13:33:15 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/04/30 18:06:52 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/07 16:09:19 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	mouse_hook(t_data *game)
 {
-	error_msg("Game closed : Clicking on the cross", game);
+	error_msg("Game closed : Clicking on the cross", game, 0);
 	return (0);
 }
 
@@ -32,7 +32,7 @@ int	key_hooks(int key_code, t_data *game)
 			player_moves(game, game->p_position.x, game->p_position.y - 1, 2);
 	}
 	if (key_code == ESC_KEY)
-		error_msg("Game closed : Pressing ESC", game);
+		error_msg("Game closed : Pressing ESC", game, 0);
 	return (0);
 }
 
@@ -44,7 +44,8 @@ void	player_moves(t_data *game, int new_px, int new_py, int status)
 	old.y = game->p_position.y;
 	game->player = status;
 	if ((game->map.map[new_px][new_py] == MAP_EXIT && game->map.coins == 0)
-		|| game->map.map[new_px][new_py] == FIRE)
+		|| game->map.map[new_px][new_py] == FIRE
+		|| game->map.map[new_px][new_py] == ENEMY)
 	{
 		game->map.map[old.x][old.y] = FLOOR;
 		load_img(game, game->map.map[old.x][old.y], old.x, old.y);

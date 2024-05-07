@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:27:37 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/04/30 17:47:08 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/07 13:18:50 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	load_img(t_data *game, char param, int i, int j)
 		put_img_to_win(game, game->floor, j, i);
 	else if (param == COINS)
 		put_img_to_win(game, game->coins, j, i);
+	else if (param == ENEMY)
+		put_img_to_win(game, game->enemy1.enemy, j, i);
 	else if (param == MAP_EXIT)
 	{
 		if (game->map.coins == 0)

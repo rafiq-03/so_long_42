@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/02 23:16:38 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/04/30 21:30:14 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/05/07 15:48:12 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,10 @@ $(NAME):mandatory/$(NAME).c $(LIBFT) $(GNL) $(UTILS_O)
 	@$(CC) $(CFLAGS) $(LIBFT_DIR)/$(LIBFT) $(GNL_OBJ) $(UTILS_O) \
 	mandatory/$(NAME).c $(MLX_FLAGS) -o $(NAME)
 
+bonus:Bonus/so_long_bonus.c $(LIBFT) $(GNL) $(B_UTILS_O)
+	@$(CC) $(CFLAGS)  $(LIBFT_DIR)/$(LIBFT) $(GNL_OBJ) $(B_UTILS_O) \
+	Bonus/so_long_bonus.c $(MLX_FLAGS) -o so_long_bonus
+
 $(GNL): $(GNL_OBJ)
 
 $(LIBFT):
@@ -74,10 +78,6 @@ $(LIBFT):
 
 %.o:%.c so_long.h
 	${CC} ${CFLAGS} -c $< -o $@
-
-bonus:Bonus/so_long_bonus.c $(LIBFT) $(GNL) $(B_UTILS_O)
-	@$(CC) $(CFLAGS)  $(LIBFT_DIR)/$(LIBFT) $(GNL_OBJ) $(B_UTILS_O) \
-	Bonus/so_long_bonus.c $(MLX_FLAGS) -o so_long_bonus
 
 clean:
 	@echo "$(RED)Cleanin object files ...$(RESET)"
@@ -91,8 +91,8 @@ clean:
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean
 	@echo "Cleaning so_long"
-	@rm $(NAME)
-	@rm so_long_bonus
+	@rm -f $(NAME)
+	@rm -f so_long_bonus
 re: fclean all
 
 .PHONY: clean fclean re all

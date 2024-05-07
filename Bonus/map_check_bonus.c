@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:27:04 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/04/30 20:20:19 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:32:37 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	map_check(t_data *game)
 	check_rows(game);
 	check_cols(game);
 	check_params(game);
-	is_valid(game);
 	game->enemy.pos = malloc(game->map.fire * sizeof(t_pos));
+	game->enemy1.pos = malloc(game->map.enemy * sizeof(t_pos));
 }
 
 void	check_rows(t_data *game)
@@ -55,18 +55,16 @@ void	check_cols(t_data *game)
 	}
 }
 
-void	check_params(t_data *game)
+void	loop_in_map(t_data *game, int i)
 {
-	int	i;
-	int	j;
+	int		j;
 
-	i = -1;
 	while (++i < game->map.rows)
 	{
 		j = -1;
 		while (++j < game->map.cols)
 		{
-			if (!ft_strchr("CPE01X", game->map.map[i][j]))
+			if (!ft_strchr("CPE01XM", game->map.map[i][j]))
 				error("Invalid map's parameter ...");
 			else if (game->map.map[i][j] == PLAYER)
 			{
@@ -80,12 +78,18 @@ void	check_params(t_data *game)
 				game->map.exit++;
 			else if (game->map.map[i][j] == FIRE)
 				game->map.fire++;
+			else if (game->map.map[i][j] == ENEMY)
+				game->map.enemy++;
 		}
 	}
 }
 
-void	is_valid(t_data *game)
+void	check_params(t_data *game)
 {
+	int	i;
+
+	i = -1;
+	loop_in_map(game, i);
 	if (game->map.player == 0)
 		error("Player doesn't exist");
 	else if (game->map.player > 1)

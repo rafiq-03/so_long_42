@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 13:33:48 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/04/30 20:01:19 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/07 16:15:48 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 # include <mlx.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include "../utils/gnl/get_next_line.h"
@@ -36,6 +35,7 @@
 # define PLAYER				80 //'P'
 # define MAP_EXIT 		 	69 //'E'
 # define FIRE 		 		88 //'X'
+# define ENEMY 		 		77 //'M'
 
 # define W_KEY			13
 # define A_KEY			0
@@ -49,21 +49,23 @@
 
 # define ESC_KEY			53
 
-# define WALL_XPM			"images/wall.xpm"
-# define FLOOR_XPM			"images/space.xpm"
-# define COINS_XPM			"images/collect.xpm"
-# define PLAYER_FRONT_XPM	"images/player_front.xpm"
-# define PLAYER_LEFT_XPM	"images/player_left.xpm"
-# define PLAYER_RIGHT_XPM	"images/player_right.xpm"
-# define PLAYER_BACK_XPM	"images/player_back.xpm"
-# define OPEN_EXIT_XPM		"images/exit_2.xpm"
-# define EXIT_CLOSED_XPM	"images/exit_1.xpm"
-# define WINNER_XPM			"images/winner.xpm"
-# define LOSER_XPM			"images/loser.xpm"
+# define WALL_XPM			"textures/wall.xpm"
+# define FLOOR_XPM			"textures/space.xpm"
+# define COINS_XPM			"textures/collect.xpm"
+# define PLAYER_FRONT_XPM	"textures/player_front.xpm"
+# define PLAYER_LEFT_XPM	"textures/player_left.xpm"
+# define PLAYER_RIGHT_XPM	"textures/player_right.xpm"
+# define PLAYER_BACK_XPM	"textures/player_back.xpm"
+# define OPEN_EXIT_XPM		"textures/exit_2.xpm"
+# define EXIT_CLOSED_XPM	"textures/exit_1.xpm"
+# define WINNER_XPM			"textures/winner.xpm"
+# define LOSER_XPM			"textures/loser.xpm"
 // enemy frames
-# define FIRE_0_XPM			"images/fire/fire0.xpm"
-# define FIRE_1_XPM			"images/fire/fire1.xpm"
-# define FIRE_2_XPM			"images/fire/fire2.xpm"
+# define FIRE_0_XPM			"textures/fire/fire0.xpm"
+# define FIRE_1_XPM			"textures/fire/fire1.xpm"
+# define FIRE_2_XPM			"textures/fire/fire2.xpm"
+
+# define ENEMY_XPM			"textures/enemy.xpm"
 
 /*------------structures----------*/
 
@@ -89,6 +91,7 @@ typedef struct s_map
 	int		player;
 	int		coins;
 	int		fire;
+	int		enemy;
 }	t_map;
 
 typedef struct s_enemy
@@ -99,6 +102,12 @@ typedef struct s_enemy
 	t_pos	*pos;
 
 }	t_enemy;
+typedef struct s_enemy1
+{
+	t_img	enemy;
+	t_pos	*pos;
+
+}	t_enemy1;
 
 typedef struct s_data
 {
@@ -126,6 +135,7 @@ typedef struct s_data
 	int			flag;
 	int			anim_flag;
 	t_enemy		enemy;
+	t_enemy1	enemy1;
 
 }	t_data;
 
@@ -152,6 +162,11 @@ void	render_player(t_data *game, int i, int j);
 void	render_map(t_data *game);
 int		animation(t_data *game);
 
+int		moves(t_data *game, int n);
+void	ft_move(t_data *game, t_pos new, int n);
+void	ft_wait(void);
+int		anim(t_data *game, int i, int a, int flag);
+
 void	player_moves(t_data *game, int x, int y, int status);
 int		key_hooks(int key_code, t_data *game);
 int		mouse_hook(t_data *game);
@@ -159,7 +174,7 @@ void	check_floor_coin(t_data *game, int new_px, int new_py, t_pos old);
 void	put_string(t_data *game);
 
 void	error(char *error);
-void	error_msg(char *error, t_data *game);
+void	error_msg(char *error, t_data *game, int flag);
 
 void	destroy_imgs(t_data *game);
 void	victory(t_data *game);
