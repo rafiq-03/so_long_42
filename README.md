@@ -67,12 +67,13 @@ return (0);
 </code></pre>
  <h2>Image Preview</h2>
     <p>Below is an image preview of the game in action:</p>
-    <img src="so_long.png.png" alt="so_long game preview">
-<h2>Video Overview</h2>
-<p><strong>so_long</strong> project:</p>
+    <img src="so_long.png" alt="so_long game preview">
+
+<!-- <h2>Video Overview</h2> -->
+<!-- <p><strong>so_long</strong> project:</p>
 <video width="560" height="315" controls>
     <source src="so_long.mov" type="video/mov">
-</video>
+</video> -->
 <h2>Conclusion</h2>
 <p>The <strong>so_long</strong> project is an excellent opportunity to delve into game development and graphical programming. By completing this project, you will gain valuable skills in rendering 2D graphics, handling user input, and managing game states, all of which are essential for creating interactive applications.</p>
 <p>Feel free to explore, experiment, and enhance your implementation to make your game even more engaging!</p>
