@@ -67,8 +67,8 @@ return (0);
 </code></pre>
 
 <h2>Video Overview</h2>
-<p>Watch the video below for an overview and demonstration of the <strong>so_long</strong> project:</p>
-<iframe width="560" height="315" src="so_long.mov" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p><strong>so_long</strong> project:</p>
+<iframe width="560" height="315" src="so_long.mov" ></iframe>
 
 <h2>Conclusion</h2>
 <p>The <strong>so_long</strong> project is an excellent opportunity to delve into game development and graphical programming. By completing this project, you will gain valuable skills in rendering 2D graphics, handling user input, and managing game states, all of which are essential for creating interactive applications.</p>
