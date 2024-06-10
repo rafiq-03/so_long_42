@@ -11,10 +11,11 @@
 # **************************************************************************** #
 
 NAME= so_long
+BNAME= so_long_bonus
 
 ### FLAGS
 
-CC=gcc
+CC=cc
 CFLAGS= -Wall -Wextra -Werror
 MLX_FLAGS= -lmlx -framework OpenGL -framework AppKit
 
@@ -34,6 +35,7 @@ LIBFT_DIR = utils/libft
 
 UTILS_DIR = mandatory/
 UTILS_S = $(addprefix $(UTILS_DIR),		\
+						so_long.c		\
 						fill_map.c 		\
 						map_check.c 	\
 						init_game.c 	\
@@ -48,6 +50,7 @@ UTILS_O = $(UTILS_S:.c=.o)
 
 B_UTILS_DIR = Bonus/
 B_UTILS_S = $(addprefix $(B_UTILS_DIR),		\
+						so_long_bonus.c		\
 						fill_map_bonus.c 	\
 						map_check_bonus.c 	\
 						init_game_bonus.c 	\
@@ -55,33 +58,30 @@ B_UTILS_S = $(addprefix $(B_UTILS_DIR),		\
 						Put_strings_bouns.c	\
 						hooks_bonus.c 		\
 						find_path_bonus.c 	\
-						animation.c			\
-						close_game_bonus.c)
+						animation_bonus.c	\
+						close_game_bonus.c \
+						fill_enemy_ar_bonus.c)
 
 B_UTILS_O = $(B_UTILS_S:.c=.o)
 
-all: $(NAME)
+all:$(NAME)
 
-$(NAME):mandatory/$(NAME).c $(LIBFT) $(GNL) $(UTILS_O)
-	@$(CC) $(CFLAGS) $(LIBFT_DIR)/$(LIBFT) $(GNL_OBJ) $(UTILS_O) \
-	mandatory/$(NAME).c $(MLX_FLAGS) -o $(NAME)
+$(NAME):$(GNL_OBJ) $(UTILS_O)
+	make -C $(LIBFT_DIR)
+	$(CC) $(CFLAGS) -L$(LIBFT_DIR) -lft $(GNL_OBJ) $(UTILS_O) $(MLX_FLAGS) -o $(NAME)
 
-bonus:Bonus/so_long_bonus.c $(LIBFT) $(GNL) $(B_UTILS_O)
-	@$(CC) $(CFLAGS)  $(LIBFT_DIR)/$(LIBFT) $(GNL_OBJ) $(B_UTILS_O) \
-	Bonus/so_long_bonus.c $(MLX_FLAGS) -o so_long_bonus
+bonus:$(BNAME)
 
-$(GNL): $(GNL_OBJ)
+$(BNAME):$(GNL_OBJ) $(B_UTILS_O)
+	make -C $(LIBFT_DIR)
+	$(CC) $(CFLAGS)  -L$(LIBFT_DIR) -lft $(GNL_OBJ) $(B_UTILS_O) $(MLX_FLAGS) -o $(BNAME)
 
-$(LIBFT):
-	@echo "Libft.."
-	@make -C $(LIBFT_DIR)
-
-%.o:%.c so_long.h
+%.o:%.c mandatory/so_long.h Bonus/so_long_bonus.h 
 	${CC} ${CFLAGS} -c $< -o $@
 
 clean:
 	@echo "$(RED)Cleanin object files ...$(RESET)"
-	@make -C $(LIBFT_DIR) clean
+	@make -C $(LIBFT_DIR) fclean
 	@rm -f $(GNL_OBJ)
 	@rm -f $(UTILS_O)
 	@rm -f $(B_UTILS_O)
