@@ -65,7 +65,9 @@ mlx_loop(data.mlx);
 return (0);
 }
 </code></pre>
-
+ <h2>Image Preview</h2>
+    <p>Below is an image preview of the game in action:</p>
+    <img src="so_long.png.png" alt="so_long game preview">
 <h2>Video Overview</h2>
 <p><strong>so_long</strong> project:</p>
 <video width="560" height="315" controls>
